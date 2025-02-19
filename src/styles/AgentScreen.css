@@ -1,0 +1,76 @@
+.agent-container {
+  padding: 20px;
+}
+
+.agent-header {
+  margin-bottom: 20px;
+}
+
+.agent-header h1 {
+  font-size: 1.5rem;
+}
+
+.agent-form {
+  margin-bottom: 20px;
+  margin-top: 20px;
+}
+
+.form-row {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 10px;
+}
+
+.form-group {
+  width: 48%;
+}
+
+label {
+  font-weight: bold;
+}
+
+select {
+  width: 100%;
+  padding: 8px;
+  margin-top: 5px;
+}
+
+.btn {
+  padding: 10px 20px;
+  margin-right: 10px;
+  background-color: #0a8791;
+  color: #fff;
+  border: none;
+  cursor: pointer;
+}
+
+.btn:disabled {
+  background-color: #6c757d;
+}
+
+.alert {
+  padding: 15px;
+  border: 1px solid #bee5eb;
+  background-color: #d1ecf1;
+  margin-top: 10px;
+}
+
+.ticket-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.ticket-table th,
+.ticket-table td {
+  border: 1px solid #ddd;
+  padding: 10px;
+  text-align: left;
+}
+
+.ticket-table th {
+  background-color: #f8f9fa;
+}
+
+.actions {
+  margin-top: 20px;
+}
