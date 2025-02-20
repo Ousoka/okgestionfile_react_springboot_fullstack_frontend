@@ -22,7 +22,7 @@ const LoginScreen = () => {
     e.preventDefault();
     // console.log('Email:', email, 'Password:', password);
     // Add authentication logic here
-    navigate('/client')
+    navigate('/admin_home')
   };
 
   return (

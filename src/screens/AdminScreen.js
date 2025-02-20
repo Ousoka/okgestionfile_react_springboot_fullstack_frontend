@@ -5,7 +5,7 @@ import { useNavigate } from 'react-router-dom';
 const AdminScreen = () => {
 
   const navigate = useNavigate();
-
+  const [user, setUser] = useState({ firstName: 'John', lastName: 'Doe' }); // Example user data
   useEffect(() => {
     const handleBackPress = () => {
       navigate(-1);
@@ -51,18 +51,17 @@ const AdminScreen = () => {
   return (
     <div className="home-container">
       <header className="home-header">
-        <button
-          className="nav-button back-button"
-          onClick={() => navigate('/')}
-        >
+        <button className="nav-button back-button" onClick={() => navigate('/admin_home')}>
           /
         </button>
-        <h1>
-          Panel Admin
-        </h1>
+        <h1>Panel admin - Gestion File</h1>
       </header>
+      <main className="client-main">
+        <section className="service-selection">
+      <h2 className="section-title">Bienvenue, {user.firstName} {user.lastName}</h2>
+          <hr style={{ marginTop: "5px", marginBottom: "20px", border: "1px solid #0A8791" }} />
 
-      <main className="admin-main">
+
         {queueInfos.length > 0 ? (
           <>
             <h2>Files d'attente</h2>
@@ -104,7 +103,6 @@ const AdminScreen = () => {
         ) : (
           <p>Chargement des données...</p>
         )}
-      </main>
 
           <div className="navigation-buttons1">
             <button
@@ -121,6 +119,8 @@ const AdminScreen = () => {
             </button>
           </div>
 
+          </section>
+        </main>
     </div>
   );
 };

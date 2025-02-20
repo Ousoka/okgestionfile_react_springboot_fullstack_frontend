@@ -1,13 +1,15 @@
 import React, { useState } from 'react';
 import '../styles/AgentScreen.css';
-
+import { useNavigate } from 'react-router-dom';
 const AgentScreen = () => {
-  // Mock Data
+
+  const navigate = useNavigate();
+    // Mock Data
   const mockServices = [
     { id: 1, name: 'Service 1' },
     { id: 2, name: 'Service 2' },
   ];
-
+  const [user] = useState({ firstName: 'John', lastName: 'Doe' });
   const mockLocations = [
     { id: 1, name: 'Location 1' },
     { id: 2, name: 'Location 2' },
@@ -47,53 +49,15 @@ const AgentScreen = () => {
   return (
     <div className="home-container">
       <header className="home-header">
-        <h1>Panel Agent</h1>
+        <button className="nav-button back-button" onClick={() => navigate('/agent_home')}>
+          /
+        </button>
+        <h1>Panel Agent - Gestion File</h1>
       </header>
-      <main className="agent-main">
-        {/* Service and Location Selection */}
-        <form onSubmit={handleFormSubmit} className="agent-form">
-          <div className="form-row">
-            <div className="form-group">
-              <label htmlFor="serviceId">Selectionner un Service:</label>
-              <select
-                id="serviceId"
-                value={selectedService}
-                onChange={(e) => setSelectedService(e.target.value)}
-                required
-              >
-                <option value="" disabled>
-                  Selectionner un service
-                </option>
-                {mockServices.map((service) => (
-                  <option key={service.id} value={service.id}>
-                    {service.name}
-                  </option>
-                ))}
-              </select>
-            </div>
-            <div className="form-group">
-              <label htmlFor="locationId">Selectionner une Localisation:</label>
-              <select
-                id="locationId"
-                value={selectedLocation}
-                onChange={(e) => setSelectedLocation(e.target.value)}
-                required
-              >
-                <option value="" disabled>
-                  Selectionner une localisation
-                </option>
-                {mockLocations.map((location) => (
-                  <option key={location.id} value={location.id}>
-                    {location.name}
-                  </option>
-                ))}
-              </select>
-            </div>
-          </div>
-          <button type="submit" className="btn btn-primary">
-            Voir les Tickets
-          </button>
-        </form>
+      <main className="client-main">
+        <section className="service-selection">
+      <h2 className="section-title">Bienvenue, {user.firstName} {user.lastName}</h2>
+          <hr style={{ marginTop: "5px", marginBottom: "20px", border: "1px solid #0A8791" }} />
 
         {/* Current Ticket */}
         {currentTicket && (
@@ -158,6 +122,7 @@ const AgentScreen = () => {
             </div>
           </div>
         )}
+        </section>
       </main>
     </div>
   );

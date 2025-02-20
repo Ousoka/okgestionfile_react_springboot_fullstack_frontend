@@ -10,6 +10,10 @@ import LoginScreen from './screens/LoginScreen';
 import ClientHomeScreen from './screens/ClientHomeScreen';
 import ClientObtainTicketScreen from './screens/ClientObtainTicketScreen';
 import ClientVIewTicketsScreen from './screens/ClientViewTicketsScreen';
+import AgentHomeScreen from './screens/AgentHomeScreen';
+import AdminHomeScreen from './screens/AdminHomeScreen';
+import AdminUsersScreen from './screens/AdminUsersScreen';
+import AdminNewUserScreen from './screens/AdminNewUserScreen';
 
 function App() {
   return (
@@ -21,10 +25,15 @@ function App() {
           <Route path="/login" element={<LoginScreen />} />
           {/* the client will */}
           <Route path="/client" element={<ClientHomeScreen />} />
+          <Route path="/agent_home" element={<AgentHomeScreen />} />
           <Route path="/client_view_tickets" element={<ClientVIewTicketsScreen />} />
           <Route path="/client_obtain_ticket" element={<ClientObtainTicketScreen />} />
+          <Route path="/agent_home" element={<AgentHomeScreen />} />
           <Route path="/agent" element={<AgentScreen />} />
-          <Route path="/admin" element={<AdminScreen />} />
+          <Route path="/admin_home" element={<AdminHomeScreen />} />
+          <Route path="/admin_dashboard" element={<AdminScreen />} />
+          <Route path="/admin_users" element={<AdminUsersScreen />} />
+          <Route path="/admin_new_user" element={<AdminNewUserScreen />} />
           <Route path="/ticket" element={<TicketScreen />} />
         </Routes>
       </Router>
