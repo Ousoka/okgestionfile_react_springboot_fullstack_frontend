@@ -39,7 +39,7 @@ const ClientHomeScreen = () => {
       <header className="home-header">
         <button
           className="nav-button back-button"
-          onClick={() => navigate('/client')}
+          onClick={() => navigate('/client_home')}
         >/
         </button>
         <h1>

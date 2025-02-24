@@ -24,7 +24,7 @@ function App() {
           <Route path="/" element={<ProtectedRoute><WelcomeScreen /></ProtectedRoute>} />
           <Route path="/login" element={<LoginScreen />} />
           {/* the client will */}
-          <Route path="/client" element={<ClientHomeScreen />} />
+          <Route path="/client_home" element={<ClientHomeScreen />} />
           <Route path="/agent_home" element={<AgentHomeScreen />} />
           <Route path="/client_view_tickets" element={<ClientVIewTicketsScreen />} />
           <Route path="/client_obtain_ticket" element={<ClientObtainTicketScreen />} />

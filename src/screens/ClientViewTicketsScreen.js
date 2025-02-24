@@ -16,7 +16,7 @@ const ClientViewTicketsScreen = () => {
   return (
     <div className="home-container">
       <header className="home-header">
-        <button className="nav-button back-button" onClick={() => navigate('/client')}>
+        <button className="nav-button back-button" onClick={() => navigate('/client_home')}>
           /
         </button>
         <h1>Panel Client - Gestion File</h1>
