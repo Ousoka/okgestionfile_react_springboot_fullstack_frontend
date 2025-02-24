@@ -55,7 +55,6 @@ const ClientHomeScreen = () => {
 
       // Clear local storage and redirect to login
       localStorage.removeItem('user');
-      SecurityContextHolder.clearContext();
       navigate('/login');
     } catch (error) {
       console.error('Logout error:', error);
