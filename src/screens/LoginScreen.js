@@ -2,43 +2,51 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import '../styles/WelcomeScreen.css';
 import { FaArrowLeft } from 'react-icons/fa';
-import axios from 'axios'; // Import axios for making HTTP requests
+import axios from 'axios';
 
 const LoginScreen = () => {
   const navigate = useNavigate();
-  const [numeroTel, setNumeroTel] = useState(''); // Changed from email to numeroTel
+  const [numeroTel, setNumeroTel] = useState('');
   const [password, setPassword] = useState('');
-  const [error, setError] = useState(''); // State to handle login errors
+  const [error, setError] = useState('');
 
   const handleLogin = async (e) => {
     e.preventDefault();
 
     try {
-      // Make a POST request to the login endpoint
       const response = await axios.post('https://okgestionfile-springboot-fullstack.onrender.com/api/login', {
         numeroTel,
         password,
+      }, {
+        headers: {
+          'Content-Type': 'application/x-www-form-urlencoded', // Match backend expectation
+        },
+        withCredentials: true, // Include cookies for session
       });
 
-      // Handle the response
-      if (response.status === 200) {
-        const redirectUrl = response.data; // Get the redirect URL from the response
+      // Handle successful login
+      const { role } = response.data; // Extract role from response
 
-        // Redirect based on the user's role
-        if (redirectUrl === 'redirect:/client_home') {
+      // Store user data in localStorage or context (optional)
+      localStorage.setItem('user', JSON.stringify(response.data));
+
+      // Redirect based on role
+      switch (role) {
+        case 'CLIENT':
           navigate('/client_home');
-        } else if (redirectUrl === 'redirect:/agent_home') {
+          break;
+        case 'AGENT':
           navigate('/agent_home');
-        } else if (redirectUrl === 'redirect:/admin') {
-          navigate('/admin');
-        } else {
-          navigate('/home'); // Default redirect
-        }
+          break;
+        case 'ADMIN':
+          navigate('/admin_home');
+          break;
+        default:
+          navigate('/home');
       }
     } catch (error) {
-      // Handle login errors
       if (error.response && error.response.status === 401) {
-        setError('Numéro de téléphone ou mot de passe invalide.');
+        setError(error.response.data.message || 'Numéro de téléphone ou mot de passe invalide.');
       } else {
         setError('Une erreur s\'est produite. Veuillez réessayer.');
       }
@@ -48,18 +56,12 @@ const LoginScreen = () => {
 
   return (
     <div className="home-container">
-      {/* Header Section */}
       <header className="home-header">
-        <button
-          className="nav-button back-button"
-          onClick={() => navigate('/')}
-        >
+        <button className="nav-button back-button" onClick={() => navigate('/')}>
           <FaArrowLeft />
         </button>
         <h1>Bienvenue sur OKGestionFile</h1>
       </header>
-
-      {/* Main Content */}
       <main className="home-main">
         <section className="navigation-section">
           <form className="login-form" onSubmit={handleLogin}>
@@ -79,7 +81,7 @@ const LoginScreen = () => {
               onChange={(e) => setPassword(e.target.value)}
               required
             />
-            {error && <p className="error-message">{error}</p>} {/* Display error message */}
+            {error && <p className="error-message">{error}</p>}
             <button type="submit" className="nav-button">
               Se connecter
             </button>
