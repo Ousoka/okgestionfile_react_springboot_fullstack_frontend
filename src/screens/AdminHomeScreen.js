@@ -111,7 +111,7 @@ const AdminHomeScreen = () => {
             </button>
             <button
               className="nav-button admin-button"
-              onClick={() => navigate('/login')}
+              onClick={handleLogout}
             >
               Se deconnecter
             </button>
