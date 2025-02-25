@@ -79,15 +79,16 @@ const ClientViewTicketsScreen = () => {
   const [loading, setLoading] = useState(true); // Loading state
   const [error, setError] = useState(null); // Error state
 
-  // Retrieve user details from localStorage
+  // Load user data from localStorage on mount
   useEffect(() => {
     const storedUser = JSON.parse(localStorage.getItem('user'));
     if (storedUser) {
-      setUser(storedUser); // Set user data in state
+      setUser(storedUser);
     } else {
       // Redirect to login if no user data is found
       navigate('/login');
     }
+    setLoading(false);
   }, [navigate]);
 
   // Fetch tickets from the backend
@@ -139,7 +140,7 @@ const ClientViewTicketsScreen = () => {
       </header>
       <main className="client-main">
         <section className="service-selection">
-          <h2 className="section-title">Bienvenue, {user.firstName} {user.lastName}</h2>
+          <h2 className="section-title">Bienvenue, {user?.prenom} {user?.nom}</h2>
           <hr style={{ marginTop: '5px', marginBottom: '20px', border: '1px solid #0A8791' }} />
           <h2 className="section-title">Vos tickets</h2>
           {loading ? (

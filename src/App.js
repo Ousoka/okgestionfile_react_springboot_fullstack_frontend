@@ -14,6 +14,7 @@ import AgentHomeScreen from './screens/AgentHomeScreen';
 import AdminHomeScreen from './screens/AdminHomeScreen';
 import AdminUsersScreen from './screens/AdminUsersScreen';
 import AdminNewUserScreen from './screens/AdminNewUserScreen';
+import ClientTicketScreen from './screens/ClientTicketScreen';
 
 function App() {
   return (
@@ -34,7 +35,9 @@ function App() {
           <Route path="/admin_dashboard" element={<AdminScreen />} />
           <Route path="/admin_users" element={<AdminUsersScreen />} />
           <Route path="/admin_new_user" element={<AdminNewUserScreen />} />
-          <Route path="/ticket" element={<TicketScreen />} />
+          {/* <Route path="/ticket" element={<TicketScreen />} /> */}
+          <Route path="/ticket" element={<ClientTicketScreen />} />
+
         </Routes>
       </Router>
   );
