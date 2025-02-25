@@ -75,6 +75,7 @@ const ClientViewTicketsScreen = () => {
   const [tickets, setTickets] = useState([]); // State to store tickets
   const [firstName, setFirstName] = useState(''); // State to store user's first name
   const [lastName, setLastName] = useState(''); // State to store user's last name
+  const [user, setUser] = useState(null); // State to store user data
   const [loading, setLoading] = useState(true); // Loading state
   const [error, setError] = useState(null); // Error state
 
@@ -82,8 +83,7 @@ const ClientViewTicketsScreen = () => {
   useEffect(() => {
     const storedUser = JSON.parse(localStorage.getItem('user'));
     if (storedUser) {
-      setFirstName(storedUser.firstName);
-      setLastName(storedUser.lastName);
+      setUser(storedUser); // Set user data in state
     } else {
       // Redirect to login if no user data is found
       navigate('/login');
@@ -117,9 +117,13 @@ const ClientViewTicketsScreen = () => {
     fetchTickets();
   }, []);
 
-  if (loading) {
-    return <div>Loading...</div>; // Show loading state
+  if (!user) {
+    return null; // Do not render anything if user data is not available
   }
+
+  // if (loading) {
+  //   return <div>Loading...</div>; // Show loading state
+  // }
 
   // if (error) {
   //   return <div className="error-message">{error}</div>; // Show error message
@@ -135,10 +139,12 @@ const ClientViewTicketsScreen = () => {
       </header>
       <main className="client-main">
         <section className="service-selection">
-          <h2 className="section-title">Bienvenue, {firstName} {lastName}</h2>
+          <h2 className="section-title">Bienvenue, {user.firstName} {user.lastName}</h2>
           <hr style={{ marginTop: '5px', marginBottom: '20px', border: '1px solid #0A8791' }} />
           <h2 className="section-title">Vos tickets</h2>
-          {tickets.length === 0 ? (
+          {loading ? (
+            <div>Loading...</div>
+          ) : tickets.length === 0 ? (
             <div className="no-tickets-message">Aucun ticket trouvé.</div>
           ) : (
             <table className="ticket-table">
