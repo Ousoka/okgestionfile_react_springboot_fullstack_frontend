@@ -104,7 +104,7 @@ const ClientViewTicketsScreen = () => {
         if (response.data && response.data.tickets) {
           setTickets(response.data.tickets); // Set tickets in state
         } else {
-          setError('No tickets found.');
+          setTickets([]); // Set tickets to an empty array if no tickets are found
         }
       } catch (err) {
         console.error('Error fetching tickets:', err);
@@ -138,30 +138,34 @@ const ClientViewTicketsScreen = () => {
           <h2 className="section-title">Bienvenue, {firstName} {lastName}</h2>
           <hr style={{ marginTop: '5px', marginBottom: '20px', border: '1px solid #0A8791' }} />
           <h2 className="section-title">Vos tickets</h2>
-          <table className="ticket-table">
-            <thead>
-              <tr>
-                <th>Numéro de Ticket</th>
-                <th>Date de Création</th>
-                <th>Statut</th>
-                <th>Position dans la file</th>
-                <th>Service</th>
-                <th>Localisation</th>
-              </tr>
-            </thead>
-            <tbody>
-              {tickets.map((ticket, index) => (
-                <tr key={index}>
-                  <td>{ticket.ticketNumber}</td>
-                  <td>{ticket.createdAt}</td>
-                  <td>{ticket.status}</td>
-                  <td>{ticket.positionInQueue}</td>
-                  <td>{ticket.service?.name}</td>
-                  <td>{ticket.location?.name}</td>
+          {tickets.length === 0 ? (
+            <div className="no-tickets-message">Aucun ticket trouvé.</div>
+          ) : (
+            <table className="ticket-table">
+              <thead>
+                <tr>
+                  <th>Numéro de Ticket</th>
+                  <th>Date de Création</th>
+                  <th>Statut</th>
+                  <th>Position dans la file</th>
+                  <th>Service</th>
+                  <th>Localisation</th>
                 </tr>
-              ))}
-            </tbody>
-          </table>
+              </thead>
+              <tbody>
+                {tickets.map((ticket, index) => (
+                  <tr key={index}>
+                    <td>{ticket.ticketNumber}</td>
+                    <td>{ticket.createdAt}</td>
+                    <td>{ticket.status}</td>
+                    <td>{ticket.positionInQueue}</td>
+                    <td>{ticket.service?.name}</td>
+                    <td>{ticket.location?.name}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          )}
         </section>
       </main>
     </div>
