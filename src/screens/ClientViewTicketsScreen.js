@@ -108,7 +108,7 @@ const ClientViewTicketsScreen = () => {
         }
       } catch (err) {
         console.error('Error fetching tickets:', err);
-        setError('Failed to fetch tickets. Please try again later.');
+        // setError('Failed to fetch tickets. Please try again later.');
       } finally {
         setLoading(false); // Stop loading
       }
@@ -121,9 +121,9 @@ const ClientViewTicketsScreen = () => {
     return <div>Loading...</div>; // Show loading state
   }
 
-  if (error) {
-    return <div className="error-message">{error}</div>; // Show error message
-  }
+  // if (error) {
+  //   return <div className="error-message">{error}</div>; // Show error message
+  // }
 
   return (
     <div className="home-container">
