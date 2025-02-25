@@ -16,7 +16,7 @@ const ClientHomeScreen = () => {
     { id: 3, name: 'Service 3' },
   ];
 
-  const mockLocations = [
+  const mockLocations = [ 
     { id: 1, name: 'Location 1' },
     { id: 2, name: 'Location 2' },
     { id: 3, name: 'Location 3' },
