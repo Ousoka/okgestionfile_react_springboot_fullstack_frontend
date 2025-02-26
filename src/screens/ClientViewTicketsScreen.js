@@ -73,8 +73,6 @@ import axios from 'axios';
 const ClientViewTicketsScreen = () => {
   const navigate = useNavigate();
   const [tickets, setTickets] = useState([]); // State to store tickets
-  const [firstName, setFirstName] = useState(''); // State to store user's first name
-  const [lastName, setLastName] = useState(''); // State to store user's last name
   const [user, setUser] = useState(null); // State to store user data
   const [loading, setLoading] = useState(true); // Loading state
   const [error, setError] = useState(null); // Error state
@@ -88,12 +86,12 @@ const ClientViewTicketsScreen = () => {
       // Redirect to login if no user data is found
       navigate('/login');
     }
-    setLoading(false);
   }, [navigate]);
 
   // Fetch tickets from the backend
   useEffect(() => {
     const fetchTickets = async () => {
+      setLoading(true); // Ensure loading starts as true
       try {
         const response = await axios.get(
           'https://okgestionfile-springboot-fullstack.onrender.com/api/client_view_tickets',
@@ -109,7 +107,7 @@ const ClientViewTicketsScreen = () => {
         }
       } catch (err) {
         console.error('Error fetching tickets:', err);
-        // setError('Failed to fetch tickets. Please try again later.');
+        setError('Échec de la récupération des tickets. Veuillez réessayer plus tard.');
       } finally {
         setLoading(false); // Stop loading
       }
@@ -121,14 +119,6 @@ const ClientViewTicketsScreen = () => {
   if (!user) {
     return null; // Do not render anything if user data is not available
   }
-
-  // if (loading) {
-  //   return <div>Loading...</div>; // Show loading state
-  // }
-
-  // if (error) {
-  //   return <div className="error-message">{error}</div>; // Show error message
-  // }
 
   return (
     <div className="home-container">
@@ -144,7 +134,9 @@ const ClientViewTicketsScreen = () => {
           <hr style={{ marginTop: '5px', marginBottom: '20px', border: '1px solid #0A8791' }} />
           <h2 className="section-title">Vos tickets</h2>
           {loading ? (
-            <div>Loading...</div>
+            <div className="loading-message">Récupération de vos tickets...</div>
+          ) : error ? (
+            <div className="error-message">{error}</div>
           ) : tickets.length === 0 ? (
             <div className="no-tickets-message">Aucun ticket trouvé.</div>
           ) : (
