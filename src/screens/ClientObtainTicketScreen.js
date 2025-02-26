@@ -329,14 +329,18 @@ const ClientObtainTicketScreen = () => {
         }
       } catch (err) {
         console.error('Error fetching data:', err);
-        setError('Failed to fetch data. Please try again later.');
+        if (err.response && err.response.status === 401) {
+          navigate('/login'); // Redirect to login if unauthorized
+        } else {
+          setError('Failed to fetch data. Please try again later.');
+        }
       } finally {
         setLoading(false); // Stop loading
       }
     };
 
     fetchData();
-  }, []);
+  }, [navigate]);
 
   const handleFormSubmit = async (e) => {
     e.preventDefault();
@@ -368,7 +372,11 @@ const ClientObtainTicketScreen = () => {
       }
     } catch (err) {
       console.error('Error generating ticket:', err);
-      setError('Failed to generate ticket. Please try again later.');
+      if (err.response && err.response.status === 401) {
+        navigate('/login'); // Redirect to login if unauthorized
+      } else {
+        setError('Failed to generate ticket. Please try again later.');
+      }
     }
   };
 
