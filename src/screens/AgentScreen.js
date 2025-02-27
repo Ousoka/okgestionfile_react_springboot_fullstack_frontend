@@ -191,8 +191,14 @@ const AgentScreen = () => {
   }, [user, navigate]);
 
   const handleAction = async (action) => {
-    if (!currentTicket) {
-      alert('Aucun ticket en cours à traiter.');
+    // If no current ticket but there are EN_ATTENTE tickets, pick the first one
+    let ticketIdToUse = currentTicket ? currentTicket.id : null;
+    if (!ticketIdToUse && tickets.some((t) => t.status === 'EN_ATTENTE')) {
+      ticketIdToUse = tickets.find((t) => t.status === 'EN_ATTENTE').id;
+    }
+
+    if (!ticketIdToUse) {
+      alert('Aucun ticket en attente à traiter.');
       return;
     }
 
@@ -202,7 +208,7 @@ const AgentScreen = () => {
         'https://okgestionfile-springboot-fullstack.onrender.com/api/agent/ticket/status',
         {
           params: {
-            ticketId: currentTicket.id,
+            ticketId: ticketIdToUse,
             action: action
           },
           withCredentials: true
