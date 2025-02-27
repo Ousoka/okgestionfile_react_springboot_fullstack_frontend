@@ -31,6 +31,7 @@ function App() {
           <Route path="/client_obtain_ticket" element={<ClientObtainTicketScreen />} />
           <Route path="/agent_home" element={<AgentHomeScreen />} />
           <Route path="/agent" element={<AgentScreen />} />
+          <Route path="/agent/tickets" element={<AgentScreen />} />
           <Route path="/admin_home" element={<AdminHomeScreen />} />
           <Route path="/admin_dashboard" element={<AdminScreen />} />
           <Route path="/admin_users" element={<AdminUsersScreen />} />

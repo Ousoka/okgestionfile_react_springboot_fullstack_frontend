@@ -8,23 +8,6 @@ const AgentHomeScreen = () => {
   const navigate = useNavigate();
   const [user, setUser] = useState(null); // Initialize as null
   const [loading, setLoading] = useState(true);
-  // Mock data for services and locations
-  const mockServices = [ 
-    { id: 1, name: 'Service 1' },
-    { id: 2, name: 'Service 2' },
-    { id: 3, name: 'Service 3' },
-  ];
-  // const [user, setUser] = useState({ firstName: 'John', lastName: 'Doe' }); // Example user data
-
-  const mockLocations = [
-    { id: 1, name: 'Location 1' },
-    { id: 2, name: 'Location 2' },
-    { id: 3, name: 'Location 3' },
-  ];
-
-  const [selectedService, setSelectedService] = useState('');
-  const [selectedLocation, setSelectedLocation] = useState('');
-
   // Load user data from localStorage on mount
   useEffect(() => {
     const storedUser = JSON.parse(localStorage.getItem('user'));
@@ -36,16 +19,6 @@ const AgentHomeScreen = () => {
     }
     setLoading(false);
   }, [navigate]);
-
-  const handleFormSubmit = (e) => {
-    e.preventDefault();
-    if (selectedService && selectedLocation) {
-      navigate('/ticket');
-    } else {
-      alert('Veuillez sélectionner un service et une localisation.');
-    }
-  };
-
   
   const handleLogout = async () => {
     try {
