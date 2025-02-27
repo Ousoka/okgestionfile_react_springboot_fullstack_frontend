@@ -191,7 +191,7 @@ const AgentScreen = () => {
   }, [user, navigate]);
 
   const handleAction = async (action) => {
-    // If no current ticket but there are EN_ATTENTE tickets, pick the first one
+    // Determine ticket to process
     let ticketIdToUse = currentTicket ? currentTicket.id : null;
     if (!ticketIdToUse && tickets.some((t) => t.status === 'EN_ATTENTE')) {
       ticketIdToUse = tickets.find((t) => t.status === 'EN_ATTENTE').id;
@@ -223,7 +223,7 @@ const AgentScreen = () => {
       }
     } catch (err) {
       console.error('Error updating ticket status:', err);
-      setError('Échec de la mise à jour du statut du ticket. Veuillez réessayer plus tard.');
+      setError('Échec de la mise à jour du statut du ticket: ' + (err.response?.data || err.message));
     } finally {
       setLoading(false);
     }
@@ -303,14 +303,17 @@ const AgentScreen = () => {
                 <button
                   className="btn"
                   onClick={() => handleAction('precedent')}
-                  disabled={!currentTicket || currentTicket.status !== 'TERMINE'} // Enabled only if current ticket is TERMINE
+                  disabled={
+                    !currentTicket || 
+                    (currentTicket.status !== 'EN_COURS' && currentTicket.status !== 'TERMINE')
+                  }
                 >
                   Précédent
                 </button>
                 <button
                   className="btn"
                   onClick={() => handleAction('suivant')}
-                  disabled={!tickets.some((t) => t.status === 'EN_ATTENTE')} // Enabled if any ticket is EN_ATTENTE
+                  disabled={!tickets.some((t) => t.status === 'EN_ATTENTE') && (!currentTicket || currentTicket.status !== 'EN_COURS')}
                 >
                   Suivant
                 </button>
