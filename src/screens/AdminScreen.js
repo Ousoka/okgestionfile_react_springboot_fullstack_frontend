@@ -10,7 +10,7 @@ const AdminScreen = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
-  // Load user data from localStorage on mount
+  // Load user data from localStorage on mount only once
   useEffect(() => {
     const storedUser = JSON.parse(localStorage.getItem('user'));
     if (storedUser) {
@@ -18,7 +18,7 @@ const AdminScreen = () => {
     } else {
       navigate('/login');
     }
-  }, [navigate]);
+  }, [navigate]); // Only depends on navigate
 
   // Handle browser back button
   useEffect(() => {
@@ -26,12 +26,11 @@ const AdminScreen = () => {
       navigate(-1);
       return true;
     };
-
     window.addEventListener('popstate', handleBackPress);
     return () => window.removeEventListener('popstate', handleBackPress);
   }, [navigate]);
 
-  // Fetch admin dashboard data
+  // Fetch admin dashboard data once user is set
   useEffect(() => {
     const fetchAdminData = async () => {
       setLoading(true);
@@ -43,11 +42,11 @@ const AdminScreen = () => {
 
         if (response.data) {
           setQueueInfos(response.data.queueInfos || []);
-          // Optionally update user if backend returns fresher data
-          if (response.data.user) {
-            setUser(response.data.user);
-            localStorage.setItem('user', JSON.stringify(response.data.user));
-          }
+          // Only update user if explicitly needed, avoiding loop
+          // if (response.data.user) {
+          //   setUser(response.data.user);
+          //   localStorage.setItem('user', JSON.stringify(response.data.user));
+          // }
         } else {
           setError('Aucune donnée trouvée.');
         }
@@ -56,7 +55,7 @@ const AdminScreen = () => {
         if (err.response && err.response.status === 401) {
           navigate('/login');
         } else {
-          setError('Échec de la récupération des données. Veuillez réessayer plus tard.');
+          setError('Échec de la récupération des données: ' + (err.response?.data || err.message));
         }
       } finally {
         setLoading(false);
@@ -66,10 +65,10 @@ const AdminScreen = () => {
     if (user) {
       fetchAdminData();
     }
-  }, [user, navigate]);
+  }, [user, navigate]); // Dependencies are stable
 
   const handleLogout = () => {
-    localStorage.removeItem('user'); // Clear user data on logout
+    localStorage.removeItem('user');
     navigate('/', { replace: true });
   };
 
@@ -143,7 +142,7 @@ const AdminScreen = () => {
           <div className="navigation-buttons1">
             <button
               className="nav-button client-button"
-              onClick={() => navigate('/admin/users')} // Assuming a future /admin/users route
+              onClick={() => navigate('/admin/users')}
             >
               Gestion des utilisateurs
             </button>
