@@ -303,10 +303,7 @@ const AgentScreen = () => {
                 <button
                   className="btn"
                   onClick={() => handleAction('precedent')}
-                  disabled={
-                    !currentTicket || 
-                    (currentTicket.status !== 'EN_COURS' && currentTicket.status !== 'TERMINE')
-                  }
+                  disabled={!tickets.some((t) => t.status === 'TERMINE') && (!currentTicket || currentTicket.status !== 'EN_COURS')}
                 >
                   Précédent
                 </button>
