@@ -64,7 +64,7 @@ const AgentHomeScreen = () => {
 
         
         <div className="navigation-buttons1">
-            <button
+            <button 
               className="nav-button client-button"
               onClick={() => navigate('/agent')}
             >

@@ -8,22 +8,6 @@ const AdminHomeScreen = () => {
   const navigate = useNavigate();
   const [user, setUser] = useState(null); // Initialize as null
   const [loading, setLoading] = useState(true);
-  // Mock data for services and locations
-  const mockServices = [ 
-    { id: 1, name: 'Service 1' },
-    { id: 2, name: 'Service 2' },
-    { id: 3, name: 'Service 3' },
-  ];
-  // const [user, setUser] = useState({ firstName: 'John', lastName: 'Doe' }); // Example user data
-
-  const mockLocations = [
-    { id: 1, name: 'Location 1' },
-    { id: 2, name: 'Location 2' },
-    { id: 3, name: 'Location 3' },
-  ];
-
-  const [selectedService, setSelectedService] = useState('');
-  const [selectedLocation, setSelectedLocation] = useState('');
 
   // Load user data from localStorage on mount
   useEffect(() => {
@@ -36,15 +20,6 @@ const AdminHomeScreen = () => {
     }
     setLoading(false);
   }, [navigate]);
-
-  const handleFormSubmit = (e) => {
-    e.preventDefault();
-    if (selectedService && selectedLocation) {
-      navigate('/ticket');
-    } else {
-      alert('Veuillez sélectionner un service et une localisation.');
-    }
-  };
 
   
   const handleLogout = async () => {
@@ -77,7 +52,7 @@ const AdminHomeScreen = () => {
           onClick={() => navigate('/admin_home')}
         >/
         </button>
-        <h1>
+        <h1> 
           {/* <button onClick={() => navigate(-1)} className="resto_home_back-button">
               <FaArrowLeft size={40} color="#FFF" />
             </button> */}
