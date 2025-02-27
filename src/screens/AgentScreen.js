@@ -297,14 +297,14 @@ const AgentScreen = () => {
                 <button
                   className="btn"
                   onClick={() => handleAction('precedent')}
-                  disabled={tickets.every((t) => t.status !== 'EN_ATTENTE')}
+                  disabled={!currentTicket || currentTicket.status !== 'TERMINE'} // Enabled only if current ticket is TERMINE
                 >
                   Précédent
                 </button>
                 <button
                   className="btn"
                   onClick={() => handleAction('suivant')}
-                  disabled={tickets.every((t) => t.status !== 'TERMINE')}
+                  disabled={!tickets.some((t) => t.status === 'EN_ATTENTE')} // Enabled if any ticket is EN_ATTENTE
                 >
                   Suivant
                 </button>
