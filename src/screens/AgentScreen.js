@@ -193,12 +193,19 @@ const AgentScreen = () => {
   const handleAction = async (action) => {
     // Determine ticket to process
     let ticketIdToUse = currentTicket ? currentTicket.id : null;
-    if (!ticketIdToUse && tickets.some((t) => t.status === 'EN_ATTENTE')) {
-      ticketIdToUse = tickets.find((t) => t.status === 'EN_ATTENTE').id;
+    if (!ticketIdToUse) {
+      if (action === 'suivant' && tickets.some((t) => t.status === 'EN_ATTENTE')) {
+        ticketIdToUse = tickets.find((t) => t.status === 'EN_ATTENTE').id; // First EN_ATTENTE
+      } else if (action === 'precedent' && tickets.some((t) => t.status === 'TERMINE')) {
+        // Pick the most recent TERMINE ticket (highest positionInQueue or last in list)
+        ticketIdToUse = tickets
+          .filter((t) => t.status === 'TERMINE')
+          .sort((a, b) => b.positionInQueue - a.positionInQueue)[0]?.id;
+      }
     }
 
     if (!ticketIdToUse) {
-      alert('Aucun ticket en attente à traiter.');
+      alert(action === 'suivant' ? 'Aucun ticket en attente à traiter.' : 'Aucun ticket terminé à réactiver.');
       return;
     }
 
@@ -303,14 +310,14 @@ const AgentScreen = () => {
                 <button
                   className="btn"
                   onClick={() => handleAction('precedent')}
-                  disabled={!tickets.some((t) => t.status === 'TERMINE') && (!currentTicket || currentTicket.status !== 'EN_COURS')}
+                  disabled={tickets.every((t) => t.status === 'EN_ATTENTE')} // Disabled if all are EN_ATTENTE
                 >
                   Précédent
                 </button>
                 <button
                   className="btn"
                   onClick={() => handleAction('suivant')}
-                  disabled={!tickets.some((t) => t.status === 'EN_ATTENTE') && (!currentTicket || currentTicket.status !== 'EN_COURS')}
+                  disabled={tickets.every((t) => t.status === 'TERMINE')} // Disabled if all are TERMINE
                 >
                   Suivant
                 </button>
