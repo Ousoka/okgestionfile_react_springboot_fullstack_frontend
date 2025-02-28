@@ -11,7 +11,7 @@ const ClientTicketScreen = () => {
   const { ticket } = location.state || {}; // Retrieve the generated ticket from state
 
   // Retrieve user details from localStorage
-  const user = JSON.parse(localStorage.getItem('user'));
+  const user = JSON.parse(sessionStorage.getItem('user'));
 
   if (!user) {
     navigate('/login'); // Redirect to login if no user data is found

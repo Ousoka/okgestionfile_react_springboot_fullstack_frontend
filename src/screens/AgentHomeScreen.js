@@ -10,7 +10,7 @@ const AgentHomeScreen = () => {
   const [loading, setLoading] = useState(true);
   // Load user data from localStorage on mount
   useEffect(() => {
-    const storedUser = JSON.parse(localStorage.getItem('user'));
+    const storedUser = JSON.parse(sessionStorage.getItem('user'));
     if (storedUser) {
       setUser(storedUser);
     } else {
@@ -28,12 +28,12 @@ const AgentHomeScreen = () => {
       });
 
       // Clear local storage and redirect to login
-      localStorage.removeItem('user');
+      sessionStorage.removeItem('user');
       navigate('/login');
     } catch (error) {
       console.error('Logout error:', error);
       // Even if the request fails, clear local data and redirect
-      localStorage.removeItem('user');
+      sessionStorage.removeItem('user');
       navigate('/login');
     }
   };

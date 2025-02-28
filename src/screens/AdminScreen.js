@@ -10,9 +10,9 @@ const AdminScreen = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
-  // Load user data from localStorage on mount only once
+  // Load user data from sessionStorage on mount only once
   useEffect(() => {
-    const storedUser = JSON.parse(localStorage.getItem('user'));
+    const storedUser = JSON.parse(sessionStorage.getItem('user'));
     if (storedUser) {
       setUser(storedUser);
     } else {
@@ -68,7 +68,7 @@ const AdminScreen = () => {
   }, [user, navigate]); // Dependencies are stable
 
   const handleLogout = () => {
-    localStorage.removeItem('user');
+    sessionStorage.removeItem('user');
     navigate('/', { replace: true });
   };
 

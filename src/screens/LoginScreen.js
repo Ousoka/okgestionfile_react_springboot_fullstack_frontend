@@ -27,8 +27,8 @@ const LoginScreen = () => {
       // Handle successful login
       const { role } = response.data; // Extract role from response
 
-      // Store user data in localStorage or context (optional)
-      localStorage.setItem('user', JSON.stringify(response.data));
+      // Store user data in sessionStorage or context (optional)
+      sessionStorage.setItem('user', JSON.stringify(response.data));
 
       // Redirect based on role
       switch (role) {

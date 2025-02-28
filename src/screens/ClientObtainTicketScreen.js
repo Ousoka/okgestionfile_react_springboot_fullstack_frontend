@@ -16,7 +16,7 @@ const ClientObtainTicketScreen = () => {
 
   // Retrieve user details from localStorage
   useEffect(() => {
-    const storedUser = JSON.parse(localStorage.getItem('user'));
+    const storedUser = JSON.parse(sessionStorage.getItem('user'));
     if (storedUser) {
       setUser(storedUser); // Set user data in state
     } else {
