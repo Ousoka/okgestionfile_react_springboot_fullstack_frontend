@@ -25,30 +25,19 @@ const AdminUsersScreen = () => {
     const fetchUsers = async () => {
       setLoading(true);
       try {
-        // Using /api/admin as a placeholder; replace with /api/users if you add it
         const response = await axios.get(
-          'https://okgestionfile-springboot-fullstack.onrender.com/api/admin',
+          'https://okgestionfile-springboot-fullstack.onrender.com/api/users',
           { withCredentials: true }
         );
 
         if (response.data) {
-          // Assuming /api/admin doesn't return users directly; fetch from a hypothetical /api/users
-          const usersResponse = await axios.get(
-            'https://okgestionfile-springboot-fullstack.onrender.com/api/users', // Adjust if needed
-            { withCredentials: true }
-          );
-
-          if (usersResponse.data) {
-            setUsers({
-              agents: usersResponse.data.agents || [],
-              clients: usersResponse.data.clients || [],
-              admins: usersResponse.data.admins || [],
-            });
-          } else {
-            setError('Aucune donnée d’utilisateurs trouvée.');
-          }
+          setUsers({
+            agents: response.data.agents || [],
+            clients: response.data.clients || [],
+            admins: response.data.admins || [],
+          });
         } else {
-          setError('Aucune donnée trouvée.');
+          setError('Aucune donnée d’utilisateurs trouvée.');
         }
       } catch (err) {
         console.error('Error fetching users:', err);
