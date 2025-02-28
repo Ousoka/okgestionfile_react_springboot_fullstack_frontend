@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import '../styles/ClientScreen.css';
 import { useNavigate } from 'react-router-dom';
 import { FaArrowLeft } from 'react-icons/fa';
+import axios from '../api/axios'
 
 const ClientScreen = () => {
   const navigate = useNavigate();

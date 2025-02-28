@@ -4,6 +4,7 @@ import React from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { FaArrowLeft } from 'react-icons/fa';
 import '../styles/ClientScreen.css';
+import axios from '../api/axios'
 
 const ClientTicketScreen = () => {
   const navigate = useNavigate();

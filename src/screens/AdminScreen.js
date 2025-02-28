@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import '../styles/AdminScreen.css';
 import { useNavigate } from 'react-router-dom';
-import axios from 'axios';
+import axios from '../api/axios'
 
 const AdminScreen = () => {
   const navigate = useNavigate();

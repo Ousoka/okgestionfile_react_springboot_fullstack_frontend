@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import '../styles/ClientScreen.css';
 import { useNavigate } from 'react-router-dom';
 import { FaArrowLeft } from 'react-icons/fa';
-import axios from 'axios';
+import axios from '../api/axios'
 
 const AgentHomeScreen = () => {
   const navigate = useNavigate();

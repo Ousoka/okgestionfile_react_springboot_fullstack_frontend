@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import '../styles/WelcomeScreen.css';
 import { FaArrowLeft } from 'react-icons/fa';
-import axios from 'axios';
+import axios from '../api/axios'
 
 const LoginScreen = () => {
   const navigate = useNavigate();
