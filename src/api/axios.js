@@ -3,7 +3,7 @@ import axios from 'axios';
 const getTabId = () => {
   let tabId = sessionStorage.getItem('tabId');
   if (!tabId) {
-    tabId = crypto.randomUUID(); // Unique per tab
+    tabId = crypto.randomUUID();
     sessionStorage.setItem('tabId', tabId);
   }
   return tabId;
