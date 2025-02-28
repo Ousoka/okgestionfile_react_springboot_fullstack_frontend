@@ -139,7 +139,7 @@ const AdminScreen = () => {
             <p>Aucune file d'attente disponible.</p>
           )}
 
-          <div className="navigation-buttons1">
+          {/* <div className="navigation-buttons1">
             <button
               className="nav-button client-button"
               onClick={() => navigate('/admin/users')}
@@ -152,7 +152,7 @@ const AdminScreen = () => {
             >
               Se déconnecter
             </button>
-          </div>
+          </div> */}
         </section>
       </main>
     </div>
