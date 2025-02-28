@@ -76,9 +76,9 @@ const AdminScreen = () => {
     return null;
   }
 
-  if (loading) {
-    return <div className="loading-message">Récupération des données...</div>;
-  }
+  // if (loading) {
+  //   return <div className="loading-message">Récupération des données...</div>;
+  // }
 
   if (error) {
     return <div className="error-message">{error}</div>;
@@ -97,7 +97,11 @@ const AdminScreen = () => {
           <h2 className="section-title">Bienvenue, {user.prenom} {user.nom}</h2>
           <hr style={{ marginTop: "5px", marginBottom: "20px", border: "1px solid #0A8791" }} />
 
-          {queueInfos.length > 0 ? (
+          {loading ? (
+            <div className="loading-message">Récupération des données...</div>
+          ) : error ? (
+            <div className="error-message">{error}</div>
+          ) : queueInfos.length > 0 ? (
             <>
               <h2>Files d'attente</h2>
               <table className="admin-queue-table">

@@ -40,9 +40,9 @@ const AdminHomeScreen = () => {
     }
   };
 
-  if (loading) {
-    return <div>Loading...</div>; // Show loading state while fetching user data
-  }
+  // if (loading) {
+  //   return <div>Loading...</div>; // Show loading state while fetching user data
+  // }
 
   return (
     <div className="home-container">

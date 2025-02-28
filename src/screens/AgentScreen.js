@@ -127,6 +127,13 @@ const AgentScreen = () => {
           <hr style={{ marginTop: "5px", marginBottom: "20px", border: "1px solid #0A8791" }} />
 
           {/* Current Ticket */}
+
+          {loading ? (
+            <div className="loading-message">Récupération des données...</div>
+          ) : error ? (
+            <div className="error-message">{error}</div>
+          ) : (
+            <>
           {currentTicket && (
             <div className="current-ticket">
               <h2>Le ticket en cours de traitement</h2>
@@ -188,6 +195,8 @@ const AgentScreen = () => {
                 </button>
               </div>
             </div>
+          )}
+          </>
           )}
         </section>
       </main>
